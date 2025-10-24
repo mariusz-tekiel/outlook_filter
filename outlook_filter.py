@@ -36,7 +36,7 @@ def process_emails(output_text, progress_bar, progress_label, count_label):
             "Campaign", "Freenow","Ian Bremmer","Yanosik", "You have", "LinkedIn <notifications-noreply@linkedin.com>",
             "LinkedIn <messages-noreply@linkedin.com>","Job Placements Jobs <info@jobplacements.com>",
             "Richard Branson via LinkedIn","Rightmove Partners","LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>","Redbubble",
-            "Bounce","LinkedIn <updates-noreply@linkedin.com>", "cyberFolks <newsletter@cyberfolks.pl>"
+            "Bounce","LinkedIn <updates-noreply@linkedin.com>", "cyberFolks"
             # możesz wrzucać pełne formy typu:
             # "job placements jobs <info@jobplacements.com>",
         ]

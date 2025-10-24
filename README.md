@@ -1,5 +1,5 @@
-# outlook_filter
-Application checks emails in my Outlook and moves the unneeded ones to the special directory 
+# outlook_filter - Application checks emails in my Outlook and moves the unneeded ones to the special directory
+
 Mała, szybka aplikacja do porządkowania skrzynki Outlook (Windows/Office): automatycznie przenosi niechciane oferty pracy i inne maile do wybranych folderów na podstawie czarnej/białej listy, słów kluczowych i reguł. Działa zarówno w trybie jednorazowym (CLI), jak i w tle (zaplanowane uruchomienia, np. Harmonogram zadań).
 
 Cel: odsiać śmieci (np. masowe oferty z portali) i zostawić ważne wiadomości w INBOX.
@@ -45,7 +45,6 @@ Skonfiguruj reguły w config.yaml (patrz sekcja niżej).
 Uruchom w trybie podglądu (nic nie przenosi):
 
 python outlook_filter.py --dry-run
-
 
 Jeśli wynik wygląda dobrze – wykonaj faktyczne przenoszenie:
 

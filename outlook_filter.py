@@ -36,7 +36,8 @@ def process_emails(output_text, progress_bar, progress_label, count_label):
             "Campaign", "Freenow","Ian Bremmer","Yanosik", "You have", "LinkedIn <notifications-noreply@linkedin.com>",
             "LinkedIn <messages-noreply@linkedin.com>","Job Placements Jobs <info@jobplacements.com>",
             "Richard Branson via LinkedIn","Rightmove Partners","LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>","Redbubble",
-            "Bounce","LinkedIn <updates-noreply@linkedin.com>", "cyberFolks"
+            "Bounce","LinkedIn <updates-noreply@linkedin.com>", "cyberFolks", "InterNations","Campaign","<janitorlopez630@gmail.com>",
+            "CV-Library","<admin@cv-library.co.uk>","AliExpress","W3Schools"
             # możesz wrzucać pełne formy typu:
             # "job placements jobs <info@jobplacements.com>",
         ]
@@ -44,7 +45,22 @@ def process_emails(output_text, progress_bar, progress_label, count_label):
 
         # Outlook
         outlook = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
-        inbox = outlook.GetDefaultFolder(6)  # 6 = Inbox
+
+        # Szukaj skrzynki z nieprzeczytanymi wiadomościami we wszystkich kontach
+        inbox = None
+        for store in outlook.Stores:
+            try:
+                candidate = store.GetDefaultFolder(6)
+                if candidate.Items.Restrict("[Unread] = True").Count > 0:
+                    inbox = candidate
+                    append_text_safe(output_text, f"Używam skrzynki: {store.DisplayName}\n")
+                    break
+            except Exception:
+                continue
+
+        # Fallback: użyj domyślnej skrzynki
+        if inbox is None:
+            inbox = outlook.GetDefaultFolder(6)
 
         # Folder docelowy
         target_folder_name = "NIEPRZYDATNE"

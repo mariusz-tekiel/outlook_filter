@@ -45,7 +45,22 @@ def process_emails(output_text, progress_bar, progress_label, count_label):
 
         # Outlook
         outlook = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
-        inbox = outlook.GetDefaultFolder(6)  # 6 = Inbox
+
+        # Szukaj skrzynki z nieprzeczytanymi wiadomościami we wszystkich kontach
+        inbox = None
+        for store in outlook.Stores:
+            try:
+                candidate = store.GetDefaultFolder(6)
+                if candidate.Items.Restrict("[Unread] = True").Count > 0:
+                    inbox = candidate
+                    append_text_safe(output_text, f"Używam skrzynki: {store.DisplayName}\n")
+                    break
+            except Exception:
+                continue
+
+        # Fallback: użyj domyślnej skrzynki
+        if inbox is None:
+            inbox = outlook.GetDefaultFolder(6)
 
         # Folder docelowy
         target_folder_name = "NIEPRZYDATNE"
